@@ -1,65 +1,138 @@
-import Image from "next/image";
+import TaxCalculator from "@/components/TaxCalculator";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mb-10">
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          How Much Tax Will You Pay on Side Hustle Income?
+        </h1>
+        <p className="text-lg text-gray-600 max-w-2xl">
+          Most tax calculators treat your income as one lump sum. This one shows
+          what really happens when you stack 1099 income on top of your W-2
+          job — including the 15.3% self-employment tax that catches most people
+          off guard.
+        </p>
+      </div>
+
+      <TaxCalculator />
+
+      <div className="mt-12 space-y-8">
+        <section>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+            Why Side Hustle Income Is Taxed Differently
+          </h2>
+          <div className="prose prose-gray max-w-none text-gray-600 space-y-3">
+            <p>
+              When you earn money as a W-2 employee, your employer pays half of
+              your Social Security and Medicare taxes (7.65%). You only see your
+              half deducted from your paycheck.
+            </p>
+            <p>
+              As a 1099 contractor or freelancer, you are both the employer and
+              the employee. That means you pay the full 15.3% self-employment
+              tax — 12.4% for Social Security (up to the wage base of $168,600
+              in 2024) and 2.9% for Medicare (no cap).
+            </p>
+            <p>
+              On top of that, your side hustle income stacks on top of your W-2
+              salary, so every dollar is taxed at your highest marginal bracket.
+              If your W-2 job puts you in the 22% bracket, your side hustle
+              income starts there — not at the bottom.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+            How to Reduce Your Side Hustle Tax Bill
+          </h2>
+          <ul className="space-y-3 text-gray-600">
+            <li className="flex gap-3">
+              <span className="text-green-500 mt-0.5 shrink-0">
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </span>
+              <div>
+                <strong>Track every business expense.</strong> Home office,
+                internet, software, supplies, mileage — these reduce your net
+                self-employment income, lowering both income tax and SE tax.
+              </div>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-green-500 mt-0.5 shrink-0">
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </span>
+              <div>
+                <strong>Consider an S-Corp election.</strong> If your side hustle
+                earns over $40-50K, forming an S-Corp lets you pay yourself a
+                reasonable salary and take the rest as distributions, avoiding SE
+                tax on the distribution portion.
+              </div>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-green-500 mt-0.5 shrink-0">
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </span>
+              <div>
+                <strong>Open a Solo 401(k) or SEP IRA.</strong> You can
+                contribute up to $23,000 (employee) plus 25% of net
+                self-employment income (employer) to a Solo 401(k), reducing
+                your taxable income significantly.
+              </div>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-green-500 mt-0.5 shrink-0">
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </span>
+              <div>
+                <strong>Pay quarterly estimated taxes.</strong> Avoid a surprise
+                tax bill (and potential penalties) by paying estimated taxes each
+                quarter using IRS Form 1040-ES.
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
     </div>
   );
 }
