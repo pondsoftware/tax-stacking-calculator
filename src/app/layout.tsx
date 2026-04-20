@@ -12,6 +12,20 @@ export const metadata: Metadata = {
   title: "Side Hustle Tax Calculator — 1099 vs W-2 Tax Impact",
   description:
     "See exactly how much tax you'll pay on side hustle income stacked on top of your W-2 job. Includes self-employment tax, marginal brackets, and take-home calculation.",
+  openGraph: {
+    title: "Side Hustle Tax Calculator",
+    description:
+      "See exactly how much tax you'll pay on side hustle income stacked on top of your W-2 job. Includes self-employment tax, marginal brackets, and take-home calculation.",
+    type: "website",
+    url: "https://sidehustletaxcalculator.net",
+    siteName: "Side Hustle Tax Calculator",
+  },
+  twitter: {
+    card: "summary",
+    title: "Side Hustle Tax Calculator",
+    description:
+      "See exactly how much tax you'll pay on side hustle income stacked on top of your W-2 job. Includes self-employment tax, marginal brackets, and take-home calculation.",
+  },
 };
 
 export default function RootLayout({
