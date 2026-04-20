@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sidehustletaxcalculator.com/sitemap.xml
+Sitemap: https://sidehustletaxcalculator.net/sitemap.xml
