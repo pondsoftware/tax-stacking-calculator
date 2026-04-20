@@ -1,7 +1,48 @@
 import TaxCalculator from "@/components/TaxCalculator";
 
+const faqData = [
+  {
+    question: "How much tax do I pay on side hustle income?",
+    answer: "Side hustle income is subject to both federal income tax at your marginal rate and self-employment tax of 15.3% (12.4% Social Security + 2.9% Medicare). You can deduct half of SE tax from your income."
+  },
+  {
+    question: "Do I need to pay quarterly estimated taxes?",
+    answer: "Yes, if you expect to owe $1,000 or more in taxes. Quarterly payments are due April 15, June 15, September 15, and January 15. Missing payments can result in penalties."
+  },
+  {
+    question: "What is self-employment tax?",
+    answer: "Self-employment tax covers Social Security and Medicare contributions that would normally be split between you and an employer. As self-employed, you pay both halves — 15.3% total on 92.35% of net earnings."
+  },
+  {
+    question: "What can I deduct as a side hustler?",
+    answer: "Common deductions include home office expenses, equipment, software subscriptions, mileage, health insurance premiums, and retirement contributions (SEP IRA, Solo 401k)."
+  },
+  {
+    question: "What is the QBI deduction?",
+    answer: "The Qualified Business Income deduction lets sole proprietors deduct up to 20% of qualified business income, reducing taxable income. It phases out at higher income levels."
+  }
+];
+
 export default function Home() {
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqData.map(item => ({
+              "@type": "Question",
+              "name": item.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.answer
+              }
+            }))
+          })
+        }}
+      />
     <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-10">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -133,6 +174,19 @@ export default function Home() {
           </ul>
         </section>
       </div>
+
+      <section className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+        <div className="space-y-6">
+          {faqData.map((item, index) => (
+            <div key={index}>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.question}</h3>
+              <p className="text-gray-600">{item.answer}</p>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
+    </>
   );
 }
