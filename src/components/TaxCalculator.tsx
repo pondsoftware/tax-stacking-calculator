@@ -55,7 +55,7 @@ export default function TaxCalculator() {
                 type="number"
                 value={w2Salary}
                 onChange={(e) => setW2Salary(Number(e.target.value))}
-                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition"
                 min={0}
                 step={1000}
               />
@@ -77,7 +77,7 @@ export default function TaxCalculator() {
                 type="number"
                 value={sideIncome}
                 onChange={(e) => setSideIncome(Number(e.target.value))}
-                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition"
                 min={0}
                 step={1000}
               />
@@ -99,7 +99,7 @@ export default function TaxCalculator() {
                 type="number"
                 value={expenses}
                 onChange={(e) => setExpenses(Number(e.target.value))}
-                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                className="w-full rounded-lg border border-gray-300 pl-8 pr-4 py-3 text-lg focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition"
                 min={0}
                 step={100}
               />
@@ -116,7 +116,7 @@ export default function TaxCalculator() {
               id="status"
               value={status}
               onChange={(e) => setStatus(e.target.value as FilingStatus)}
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-white"
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-lg focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition bg-white"
             >
               <option value="single">Single</option>
               <option value="married">Married Filing Jointly</option>
@@ -134,7 +134,7 @@ export default function TaxCalculator() {
               id="state"
               value={stateCode}
               onChange={(e) => setStateCode(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-white"
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-lg focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition bg-white"
             >
               {stateTaxes.map((st) => (
                 <option key={st.code} value={st.code}>
@@ -147,14 +147,14 @@ export default function TaxCalculator() {
       </div>
 
       {/* Key Result */}
-      <div className="bg-blue-600 rounded-xl p-6 text-white text-center">
-        <p className="text-blue-100 text-sm mb-1">
+      <div className="bg-emerald-600 rounded-xl p-6 text-white text-center">
+        <p className="text-emerald-100 text-sm mb-1">
           For every $1 you earn from your side hustle, you keep
         </p>
         <p className="text-5xl font-bold mb-2">
           ${breakdown.takeHomePer1099Dollar.toFixed(2)}
         </p>
-        <p className="text-blue-200 text-sm">
+        <p className="text-emerald-200 text-sm">
           Your side hustle is taxed at an effective{" "}
           {pct(breakdown.marginalTaxRate)} (federal income tax +
           self-employment tax{breakdown.stateTax > 0 ? " + state tax" : ""})
@@ -168,7 +168,7 @@ export default function TaxCalculator() {
           <div className="py-3 px-4 text-sm font-semibold text-gray-700 border-l border-gray-200">
             W-2 Only
           </div>
-          <div className="py-3 px-4 text-sm font-semibold text-blue-700 bg-blue-50 border-l border-gray-200">
+          <div className="py-3 px-4 text-sm font-semibold text-emerald-700 bg-emerald-50 border-l border-gray-200">
             W-2 + Side Hustle
           </div>
         </div>
@@ -253,7 +253,7 @@ function ComparisonRow({
     : "text-sm text-gray-600";
   const valueCls = bold ? "font-semibold text-gray-900" : "text-gray-900";
   const rowCls = highlight ? "bg-amber-50" : "";
-  const combinedBg = highlight ? "bg-amber-50" : "bg-blue-50/30";
+  const combinedBg = highlight ? "bg-amber-50" : "bg-emerald-50/30";
 
   return (
     <div
