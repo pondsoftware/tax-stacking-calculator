@@ -186,6 +186,67 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <section className="mt-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">More Tax Calculators</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <a
+            href="/self-employment-tax"
+            className="block p-5 rounded-xl border border-gray-200 bg-white hover:border-emerald-300 hover:bg-emerald-50 transition"
+          >
+            <h3 className="font-semibold text-gray-900 mb-1">
+              Self-Employment Tax Calculator
+            </h3>
+            <p className="text-sm text-gray-500">
+              Break down the 15.3% SE tax into Social Security and Medicare components. See your deductible half.
+            </p>
+          </a>
+          <a
+            href="/quarterly-taxes"
+            className="block p-5 rounded-xl border border-gray-200 bg-white hover:border-emerald-300 hover:bg-emerald-50 transition"
+          >
+            <h3 className="font-semibold text-gray-900 mb-1">
+              Quarterly Estimated Tax Calculator
+            </h3>
+            <p className="text-sm text-gray-500">
+              Figure out how much to pay each quarter to avoid underpayment penalties. Includes due dates.
+            </p>
+          </a>
+          <a
+            href="/deductions"
+            className="block p-5 rounded-xl border border-gray-200 bg-white hover:border-emerald-300 hover:bg-emerald-50 transition"
+          >
+            <h3 className="font-semibold text-gray-900 mb-1">
+              Deduction Estimator
+            </h3>
+            <p className="text-sm text-gray-500">
+              Calculate tax savings from home office, mileage, software, health insurance, and retirement contributions.
+            </p>
+          </a>
+          <a
+            href="/1099-taxes"
+            className="block p-5 rounded-xl border border-gray-200 bg-white hover:border-emerald-300 hover:bg-emerald-50 transition"
+          >
+            <h3 className="font-semibold text-gray-900 mb-1">
+              1099 Tax Calculator
+            </h3>
+            <p className="text-sm text-gray-500">
+              Calculate taxes on 1099-NEC and 1099-K income. Compare W-2 vs 1099 tax treatment.
+            </p>
+          </a>
+          <a
+            href="/state-taxes"
+            className="block p-5 rounded-xl border border-gray-200 bg-white hover:border-emerald-300 hover:bg-emerald-50 transition sm:col-span-2"
+          >
+            <h3 className="font-semibold text-gray-900 mb-1">
+              State Tax Comparison
+            </h3>
+            <p className="text-sm text-gray-500">
+              Compare state income tax rates across all 50 states. See which no-tax states save you the most on side hustle income.
+            </p>
+          </a>
+        </div>
+      </section>
     </div>
       <script
         type="application/ld+json"

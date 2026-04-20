@@ -2,7 +2,14 @@ import { writeFileSync } from "fs";
 
 const DOMAIN = "https://sidehustletaxcalculator.net";
 
-const urls = ["/"];
+const urls = [
+  "/",
+  "/self-employment-tax",
+  "/quarterly-taxes",
+  "/deductions",
+  "/1099-taxes",
+  "/state-taxes",
+];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
