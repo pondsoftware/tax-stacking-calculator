@@ -1,3 +1,5 @@
+import { calculateStateTax } from "./state-taxes";
+
 // 2024 Federal Income Tax Brackets
 export interface TaxBracket {
   min: number;
@@ -101,6 +103,11 @@ export function calculateSETax(selfEmploymentIncome: number, w2Wages: number) {
   };
 }
 
+// QBI deduction thresholds (2024)
+export const QBI_RATE = 0.20;
+export const QBI_THRESHOLD_SINGLE = 191950;
+export const QBI_THRESHOLD_MARRIED = 383900;
+
 export interface TaxBreakdown {
   // W-2 only
   w2TaxableIncome: number;
@@ -116,6 +123,9 @@ export interface TaxBreakdown {
     total: number;
     deductibleHalf: number;
   };
+  qbiDeduction: number;
+  stateTax: number;
+  stateCode: string;
   combinedTaxableIncome: number;
   combinedFederalTax: number;
   combinedEffectiveRate: number;
@@ -127,13 +137,17 @@ export interface TaxBreakdown {
   marginalTaxRate: number;
   takeHomePer1099Dollar: number;
   sideHustleTakeHome: number;
+
+  // Quarterly estimates
+  quarterlyPayment: number;
 }
 
 export function calculateFullBreakdown(
   w2Salary: number,
   sideIncome: number,
   status: FilingStatus,
-  businessExpenses: number = 0
+  businessExpenses: number = 0,
+  stateCode: string = "TX"
 ): TaxBreakdown {
   const deduction = standardDeduction[status];
 
@@ -147,26 +161,42 @@ export function calculateFullBreakdown(
   const netSideIncome = Math.max(0, sideIncome - businessExpenses);
   const seTax = calculateSETax(netSideIncome, w2Salary);
 
-  // Combined taxable income
-  // Deduct half of SE tax and business expenses from AGI
-  const combinedAGI = w2Salary + netSideIncome - seTax.deductibleHalf;
-  const combinedTaxableIncome = Math.max(0, combinedAGI - deduction);
+  // QBI Deduction: 20% of (net side income - half of SE tax)
+  const qbiThreshold =
+    status === "married" ? QBI_THRESHOLD_MARRIED : QBI_THRESHOLD_SINGLE;
+  const combinedAGIPreQBI = w2Salary + netSideIncome - seTax.deductibleHalf;
+  const combinedTaxablePreQBI = Math.max(0, combinedAGIPreQBI - deduction);
+  const qbiEligible = combinedTaxablePreQBI <= qbiThreshold;
+  const qbiDeduction = qbiEligible
+    ? Math.max(0, (netSideIncome - seTax.deductibleHalf) * QBI_RATE)
+    : 0;
+
+  // Combined taxable income (with QBI deduction)
+  const combinedTaxableIncome = Math.max(0, combinedTaxablePreQBI - qbiDeduction);
   const combinedFederalTax = calculateFederalTax(combinedTaxableIncome, status);
   const totalIncome = w2Salary + sideIncome;
+
+  // State tax on combined taxable income
+  const stateTax = calculateStateTax(combinedTaxableIncome, stateCode);
+
   const combinedEffectiveRate =
     totalIncome > 0
-      ? (combinedFederalTax + seTax.total) / totalIncome
+      ? (combinedFederalTax + seTax.total + stateTax) / totalIncome
       : 0;
   const combinedMarginalRate = getMarginalRate(combinedTaxableIncome, status);
 
   // Marginal impact
   const additionalFederalTax = combinedFederalTax - w2FederalTax;
-  const totalAdditionalTax = additionalFederalTax + seTax.total;
+  const totalAdditionalTax = additionalFederalTax + seTax.total + stateTax;
   const marginalTaxRate =
     netSideIncome > 0 ? totalAdditionalTax / netSideIncome : 0;
   const takeHomePer1099Dollar =
     netSideIncome > 0 ? 1 - totalAdditionalTax / netSideIncome : 1;
   const sideHustleTakeHome = netSideIncome - totalAdditionalTax;
+
+  // Quarterly estimated payment (total tax liability / 4)
+  const totalTaxLiability = combinedFederalTax + seTax.total + stateTax;
+  const quarterlyPayment = totalTaxLiability / 4;
 
   return {
     w2TaxableIncome,
@@ -175,6 +205,9 @@ export function calculateFullBreakdown(
     w2MarginalRate,
     grossSideIncome: sideIncome,
     seTax,
+    qbiDeduction,
+    stateTax,
+    stateCode,
     combinedTaxableIncome,
     combinedFederalTax,
     combinedEffectiveRate,
@@ -184,5 +217,6 @@ export function calculateFullBreakdown(
     marginalTaxRate,
     takeHomePer1099Dollar,
     sideHustleTakeHome,
+    quarterlyPayment,
   };
 }

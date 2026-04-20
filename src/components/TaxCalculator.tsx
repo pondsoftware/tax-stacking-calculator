@@ -6,6 +6,7 @@ import {
   calculateFullBreakdown,
   TaxBreakdown,
 } from "@/data/tax-brackets";
+import { stateTaxes } from "@/data/state-taxes";
 
 function fmt(n: number): string {
   return n.toLocaleString("en-US", { maximumFractionDigits: 0 });
@@ -20,12 +21,14 @@ export default function TaxCalculator() {
   const [sideIncome, setSideIncome] = useState(20000);
   const [expenses, setExpenses] = useState(0);
   const [status, setStatus] = useState<FilingStatus>("single");
+  const [stateCode, setStateCode] = useState("TX");
 
   const breakdown = calculateFullBreakdown(
     w2Salary,
     sideIncome,
     status,
-    expenses
+    expenses,
+    stateCode
   );
 
   return (
@@ -120,6 +123,26 @@ export default function TaxCalculator() {
               <option value="head">Head of Household</option>
             </select>
           </div>
+          <div>
+            <label
+              htmlFor="state"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
+              State
+            </label>
+            <select
+              id="state"
+              value={stateCode}
+              onChange={(e) => setStateCode(e.target.value)}
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition bg-white"
+            >
+              {stateTaxes.map((st) => (
+                <option key={st.code} value={st.code}>
+                  {st.name} ({st.code}){st.rate === 0 ? " — No income tax" : ""}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
@@ -134,7 +157,7 @@ export default function TaxCalculator() {
         <p className="text-blue-200 text-sm">
           Your side hustle is taxed at an effective{" "}
           {pct(breakdown.marginalTaxRate)} (federal income tax +
-          self-employment tax)
+          self-employment tax{breakdown.stateTax > 0 ? " + state tax" : ""})
         </p>
       </div>
 
@@ -170,10 +193,22 @@ export default function TaxCalculator() {
           combined={`$${fmt(breakdown.seTax.total)}`}
           highlight
         />
+        {breakdown.qbiDeduction > 0 && (
+          <ComparisonRow
+            label="QBI Deduction (20%)"
+            w2="$0"
+            combined={`-$${fmt(breakdown.qbiDeduction)}`}
+          />
+        )}
         <ComparisonRow
-          label="Total Federal Tax"
+          label={`State Tax (${breakdown.stateCode})`}
+          w2={`$${fmt(breakdown.stateTax > 0 ? breakdown.stateTax * (breakdown.w2TaxableIncome / (breakdown.combinedTaxableIncome || 1)) : 0)}`}
+          combined={`$${fmt(breakdown.stateTax)}`}
+        />
+        <ComparisonRow
+          label="Total Tax"
           w2={`$${fmt(breakdown.w2FederalTax)}`}
-          combined={`$${fmt(breakdown.combinedFederalTax + breakdown.seTax.total)}`}
+          combined={`$${fmt(breakdown.combinedFederalTax + breakdown.seTax.total + breakdown.stateTax)}`}
           bold
         />
         <ComparisonRow
@@ -193,6 +228,9 @@ export default function TaxCalculator() {
 
       {/* Side Hustle Summary */}
       <SideHustleSummary breakdown={breakdown} expenses={expenses} />
+
+      {/* Quarterly Estimated Tax Payments */}
+      <QuarterlySchedule breakdown={breakdown} />
     </div>
   );
 }
@@ -305,6 +343,13 @@ function SideHustleSummary({
           label="Net self-employment income"
           value={`$${fmt(netSideIncome)}`}
         />
+        {breakdown.qbiDeduction > 0 && (
+          <SummaryLine
+            label="QBI Deduction (20%)"
+            value={`-$${fmt(breakdown.qbiDeduction)}`}
+            color="green"
+          />
+        )}
         <SummaryLine
           label="Additional federal income tax"
           value={`-$${fmt(breakdown.additionalFederalTax)}`}
@@ -313,6 +358,11 @@ function SideHustleSummary({
         <SummaryLine
           label="Self-employment tax"
           value={`-$${fmt(breakdown.seTax.total)}`}
+          color="red"
+        />
+        <SummaryLine
+          label={`State tax (${breakdown.stateCode})`}
+          value={`-$${fmt(breakdown.stateTax)}`}
           color="red"
         />
         <div className="border-t border-gray-200 pt-3">
@@ -324,6 +374,47 @@ function SideHustleSummary({
           />
         </div>
       </div>
+    </div>
+  );
+}
+
+function QuarterlySchedule({ breakdown }: { breakdown: TaxBreakdown }) {
+  const quarters = [
+    { label: "Q1", due: "April 15" },
+    { label: "Q2", due: "June 15" },
+    { label: "Q3", due: "September 15" },
+    { label: "Q4", due: "January 15" },
+  ];
+
+  return (
+    <div className="bg-white rounded-xl border border-gray-200 p-6">
+      <h3 className="font-semibold text-gray-900 mb-2">
+        Quarterly Estimated Tax Payments
+      </h3>
+      <p className="text-sm text-gray-500 mb-4">
+        To avoid underpayment penalties, pay estimated taxes each quarter. Each
+        payment is 1/4 of your total estimated tax liability (federal + SE +
+        state).
+      </p>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {quarters.map((q) => (
+          <div
+            key={q.label}
+            className="bg-gray-50 rounded-lg p-4 text-center border border-gray-100"
+          >
+            <p className="text-xs font-medium text-gray-500 uppercase">
+              {q.label}
+            </p>
+            <p className="text-xl font-bold text-gray-900 mt-1">
+              ${fmt(breakdown.quarterlyPayment)}
+            </p>
+            <p className="text-xs text-gray-400 mt-1">Due {q.due}</p>
+          </div>
+        ))}
+      </div>
+      <p className="text-xs text-gray-400 mt-3">
+        Total annual estimated tax: ${fmt(breakdown.quarterlyPayment * 4)}
+      </p>
     </div>
   );
 }
