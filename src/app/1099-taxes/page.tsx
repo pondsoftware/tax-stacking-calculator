@@ -50,9 +50,21 @@ const faqData = [
   },
 ];
 
+const webAppJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "1099 Tax Calculator",
+  description: "Calculate how much tax you owe on 1099-NEC and 1099-K income. Includes federal income tax, self-employment tax, and state taxes. See W-2 vs 1099 comparison.",
+  url: "https://sidehustletaxcalculator.net/1099-taxes",
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Any",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+};
+
 export default function Taxes1099Page() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

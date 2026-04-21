@@ -50,9 +50,21 @@ const faqData = [
   },
 ];
 
+const webAppJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "State Tax Comparison",
+  description: "Compare state income tax rates across all 50 states for freelancers and side hustlers. See which states have no income tax and how state taxes impact your take-home pay.",
+  url: "https://sidehustletaxcalculator.net/state-taxes",
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Any",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+};
+
 export default function StateTaxesPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

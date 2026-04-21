@@ -50,9 +50,21 @@ const faqData = [
   },
 ];
 
+const webAppJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Quarterly Estimated Tax Calculator",
+  description: "Calculate how much to pay in quarterly estimated taxes as a freelancer or side hustler. See payment due dates, safe harbor rules, and avoid underpayment penalties.",
+  url: "https://sidehustletaxcalculator.net/quarterly-taxes",
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Any",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+};
+
 export default function QuarterlyTaxesPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

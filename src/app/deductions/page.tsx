@@ -50,9 +50,21 @@ const faqData = [
   },
 ];
 
+const webAppJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Tax Deductions Calculator",
+  description: "Calculate tax savings from common side hustle deductions: home office, mileage, supplies, software, health insurance, and retirement contributions. See how much each deduction saves.",
+  url: "https://sidehustletaxcalculator.net/deductions",
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Any",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+};
+
 export default function DeductionsPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

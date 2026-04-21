@@ -50,9 +50,21 @@ const faqData = [
   },
 ];
 
+const webAppJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Self-Employment Tax Calculator",
+  description: "Calculate your self-employment tax (15.3%) including Social Security (12.4%) and Medicare (2.9%). See how the SE tax deduction reduces your income tax.",
+  url: "https://sidehustletaxcalculator.net/self-employment-tax",
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Any",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+};
+
 export default function SelfEmploymentTaxPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
