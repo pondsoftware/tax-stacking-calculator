@@ -16,22 +16,22 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg",
   },
-  title: "Side Hustle Tax Calculator — 1099 vs W-2 Tax Impact",
+  title: "1099 & 1040-ES Tax Calculator for Independent Contractors",
   description:
-    "See exactly how much tax you'll pay on side hustle income stacked on top of your W-2 job. Includes self-employment tax, marginal brackets, and take-home calculation.",
+    "Estimate your 1099 taxes, quarterly 1040-ES payments, and take-home pay. Built for independent contractors, freelancers, and gig workers.",
   openGraph: {
-    title: "Side Hustle Tax Calculator",
+    title: "1099 & 1040-ES Tax Calculator for Independent Contractors",
     description:
-      "See exactly how much tax you'll pay on side hustle income stacked on top of your W-2 job. Includes self-employment tax, marginal brackets, and take-home calculation.",
+      "Estimate your 1099 taxes, quarterly 1040-ES payments, and take-home pay. Built for independent contractors, freelancers, and gig workers.",
     type: "website",
     url: "https://sidehustletaxcalculator.net",
     siteName: "Side Hustle Tax Calculator",
   },
   twitter: {
     card: "summary",
-    title: "Side Hustle Tax Calculator",
+    title: "1099 & 1040-ES Tax Calculator for Independent Contractors",
     description:
-      "See exactly how much tax you'll pay on side hustle income stacked on top of your W-2 job. Includes self-employment tax, marginal brackets, and take-home calculation.",
+      "Estimate your 1099 taxes, quarterly 1040-ES payments, and take-home pay. Built for independent contractors, freelancers, and gig workers.",
   },
 };
 

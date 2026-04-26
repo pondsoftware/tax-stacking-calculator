@@ -26,8 +26,8 @@ const faqData = [
 const webAppJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  name: "Side Hustle Tax Calculator",
-  description: "See exactly how much tax you'll pay on side hustle income stacked on top of your W-2 job. Includes self-employment tax, marginal brackets, and take-home calculation.",
+  name: "1099 & 1040-ES Tax Calculator for Independent Contractors",
+  description: "Estimate your 1099 taxes, quarterly 1040-ES payments, and take-home pay. Built for independent contractors, freelancers, and gig workers.",
   url: "https://sidehustletaxcalculator.net",
   applicationCategory: "FinanceApplication",
   operatingSystem: "Any",
@@ -58,13 +58,13 @@ export default function Home() {
     <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-10">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-          How Much Tax Will You Pay on Side Hustle Income?
+          1099 Tax Calculator for Independent Contractors &amp; Gig Workers
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl">
           Most tax calculators treat your income as one lump sum. This one shows
           what really happens when you stack 1099 income on top of your W-2
-          job — including the 15.3% self-employment tax that catches most people
-          off guard.
+          job — including the 15.3% self-employment tax and your quarterly
+          1040-ES estimated payments.
         </p>
       </div>
 
