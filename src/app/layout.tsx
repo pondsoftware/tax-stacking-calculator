@@ -16,11 +16,11 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg",
   },
-  title: "1099 & 1040-ES Tax Calculator for Independent Contractors",
+  title: "1099 and 1040-ES Tax Calculator for Independent Contractors",
   description:
     "Estimate your 1099 taxes, quarterly 1040-ES payments, and take-home pay. Built for independent contractors, freelancers, and gig workers.",
   openGraph: {
-    title: "1099 & 1040-ES Tax Calculator for Independent Contractors",
+    title: "1099 and 1040-ES Tax Calculator for Independent Contractors",
     description:
       "Estimate your 1099 taxes, quarterly 1040-ES payments, and take-home pay. Built for independent contractors, freelancers, and gig workers.",
     type: "website",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "1099 & 1040-ES Tax Calculator for Independent Contractors",
+    title: "1099 and 1040-ES Tax Calculator for Independent Contractors",
     description:
       "Estimate your 1099 taxes, quarterly 1040-ES payments, and take-home pay. Built for independent contractors, freelancers, and gig workers.",
   },
