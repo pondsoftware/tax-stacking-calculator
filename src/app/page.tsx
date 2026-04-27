@@ -26,7 +26,7 @@ const faqData = [
 const webAppJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  name: "1099 & 1040-ES Tax Calculator for Independent Contractors",
+  name: "1099 and 1040-ES Tax Calculator for Independent Contractors",
   description: "Estimate your 1099 taxes, quarterly 1040-ES payments, and take-home pay. Built for independent contractors, freelancers, and gig workers.",
   url: "https://sidehustletaxcalculator.net",
   applicationCategory: "FinanceApplication",
